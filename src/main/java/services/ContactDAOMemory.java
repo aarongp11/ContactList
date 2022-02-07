@@ -2,24 +2,37 @@ package services;
 
 import data.Contact;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import java.util.Collection;
+
+@ApplicationScoped
 public class ContactDAOMemory implements ContactDAO {
+    @Inject
+    DataStorage ds;
+
     @Override
-    public boolean create(Contact contact) {
-        return false;
+    public Contact create(Contact contact) {
+        return ds.createContact(contact);
     }
 
     @Override
     public Contact retrieve(String nif) {
-        return null;
+        return ds.retrieveContact(nif);
+    }
+
+    @Override
+    public Collection<Contact> retrieveAll() {
+        return ds.getContacts();
     }
 
     @Override
     public Contact update(Contact contact) {
-        return null;
+        return ds.updateContact(contact);
     }
 
     @Override
     public Contact delete(String nif) {
-        return null;
+        return ds.deleteContact(nif);
     }
 }
